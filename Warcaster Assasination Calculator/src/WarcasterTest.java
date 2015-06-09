@@ -1,7 +1,5 @@
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-
 import org.junit.Test;
 
 public class WarcasterTest {
@@ -30,12 +28,6 @@ public class WarcasterTest {
 		warcaster.AddWeapon(TestWeapon, 15, false, true, false);
 		assertEquals(1, warcaster.GetWeapons().size());
 		assertEquals("TestWeapon", warcaster.GetWeapons().get(0).GetName());
-	}
-	@Test
-	public void TotalAttacksReturnsRemainingFocusPlusNumberOfWeapons() {
-		Warcaster warcaster = new Warcaster(0, 0, 0, 7, 0, 0, "TestName");
-		warcaster.AddWeapon("TestWeapon", 0, false, false, false);
-		assertEquals(8, warcaster.TotalAttacks(warcaster));
 	}
 	@Test
 	public void MakeInitialAttackMakesInitialAttack() {

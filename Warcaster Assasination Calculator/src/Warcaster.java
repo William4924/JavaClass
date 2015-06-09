@@ -45,6 +45,7 @@ public class Warcaster {
 	public int GetRemainingFocus() { return RemainingFocus; }
 	public int GetRemainingBoxes() { return RemainingBoxes;	}
 	public int GetStrength() { return Strength; }
+	public String GetName() { return Name; }
 	public ArrayList<Weapon> GetWeapons() { return WeaponList; }
 	public boolean GetHasInitialAttackBeenMade() { return HasInitialAttackBeenMade; }
 	
@@ -52,11 +53,6 @@ public class Warcaster {
 			boolean IsShield, boolean IsBuckler) {
 		Weapon weapon = new Weapon(Name, Power, IsWeaponMaster, IsShield, IsBuckler);
 	    WeaponList.add(weapon);
-	}
-	
-	public int TotalAttacks(Warcaster warcaster) {
-		
-		return warcaster.GetRemainingFocus() + warcaster.GetWeapons().size();
 	}
 	
 	public void MakeInitalAttack() {
