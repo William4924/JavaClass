@@ -1,23 +1,27 @@
 public class Referee {
 	
-	public Boolean IsAttackASuccess(Warcaster attacker, Warcaster defender) {
+	public Boolean IsAttackASuccess(Attack attack) {
 		
-		if (attacker.GetMAT() + 7 >= defender.GetDefense()) {
+		if (attack.getAttacker().GetMAT() + rollDice() >= attack.getDefender().GetDefense()) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 	
-	public int GetAttackDamage(Warcaster attacker, Warcaster defender, Weapon weapon) {
+	public int determineAttackDamage(Attack attack) {
 		
-		Attack attack = new Attack(attacker, weapon);
-		int DifferenceBetweenDamageRollAndArmor = attack.PowerPlusStrength() + 7 - defender.GetArmor();
+		int DifferenceBetweenDamageRollAndArmor = attack.PowerPlusStrength() + rollDice() - attack.getDefender().GetArmor();
 		if (DifferenceBetweenDamageRollAndArmor > 0) {
 			
 			return DifferenceBetweenDamageRollAndArmor;
 		} else {
 			return 0;
 		}
+	}
+	
+	public int rollDice() {
+		
+		return 7;
 	}
 }

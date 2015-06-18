@@ -55,14 +55,18 @@ public class Warcaster {
 	    WeaponList.add(weapon);
 	}
 	
-	public void MakeInitalAttack() {
+	public Attack makeInitialAttack(Warcaster defender) {
 		
+		Attack attack = new Attack(this, GetWeapons().get(0), defender);
 		HasInitialAttackBeenMade = true;
+		return attack;
 	}
 	
-	public void BuyAttack() {
+	public Attack BuyAttack(Warcaster defender) {
 		
+		Attack attack = new Attack(this, GetWeapons().get(0), defender);
 		RemainingFocus--;
+		return attack;
 	}
 	
 	public boolean IsAbleToBuyAttack() {

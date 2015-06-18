@@ -1,12 +1,14 @@
 public class Attack {
 
 	private Weapon currentWeapon;
-	private Warcaster currentWarcaster;
+	private Warcaster currentAttacker;
+	private Warcaster currentDefender;
 	
-	public Attack(Warcaster attacker, Weapon weapon) {
+	public Attack(Warcaster attacker, Weapon weapon, Warcaster defender) {
 		
 		currentWeapon = weapon;
-		currentWarcaster = attacker;
+		currentAttacker = attacker;
+		currentDefender = defender;
 	}
 
 	public Weapon GetWeapon() {
@@ -14,13 +16,18 @@ public class Attack {
 		return currentWeapon;
 	}
 
-	public Warcaster GetWarcaster() {
+	public Warcaster getAttacker() {
 		
-		return currentWarcaster;
+		return currentAttacker;
+	}
+	
+	public Warcaster getDefender() {
+		
+		return currentDefender;
 	}
 	
 	public int PowerPlusStrength() {
 		
-		return currentWeapon.GetPower() + currentWarcaster.GetStrength();
+		return currentWeapon.GetPower() + currentAttacker.GetStrength();
 	}
 }

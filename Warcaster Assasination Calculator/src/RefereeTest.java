@@ -10,7 +10,9 @@ public class RefereeTest {
 		Referee referee = new Referee();
 		Warcaster AttackingWarcaster = new Warcaster(6, 0, 0, 0, 0, 0, "TestName");
 		Warcaster DefendingWarcaster = new Warcaster(0, 14, 0, 0, 0, 0, "TestName");
-		assertFalse(referee.IsAttackASuccess(AttackingWarcaster, DefendingWarcaster));
+		Weapon weapon = new Weapon("Test Name", 10, true, false, true);
+		Attack attack = new Attack(AttackingWarcaster, weapon, DefendingWarcaster);
+		assertFalse(referee.IsAttackASuccess(attack));
 	}
 	@Test
 	public void DoesAttackHitHitsOnANumberHigherThanDefense() {
@@ -18,7 +20,9 @@ public class RefereeTest {
 		Referee referee = new Referee();
 		Warcaster AttackingWarcaster = new Warcaster(8, 0, 0, 0, 0, 0, "TestName");
 		Warcaster DefendingWarcaster = new Warcaster(0, 14, 0, 0, 0, 0, "TestName");
-		assertTrue(referee.IsAttackASuccess(AttackingWarcaster, DefendingWarcaster));
+		Weapon weapon = new Weapon("Test Name", 10, true, false, true);
+		Attack attack = new Attack(AttackingWarcaster, weapon, DefendingWarcaster);
+		assertTrue(referee.IsAttackASuccess(attack));
 	}
 	@Test
 	public void DoesAttackHitHitsOnANumberEqualToTheDefense() {
@@ -26,7 +30,9 @@ public class RefereeTest {
 		Referee referee = new Referee();
 		Warcaster AttackingWarcaster = new Warcaster(7, 0, 0, 0, 0, 0, "TestName");
 		Warcaster DefendingWarcaster = new Warcaster(0, 14, 0, 0, 0, 0, "TestName");
-		assertTrue(referee.IsAttackASuccess(AttackingWarcaster, DefendingWarcaster));
+		Weapon weapon = new Weapon("Test Name", 10, true, false, true);
+		Attack attack = new Attack(AttackingWarcaster, weapon, DefendingWarcaster);
+		assertTrue(referee.IsAttackASuccess(attack));
 	}
 	@Test
 	public void RollDamageDealsDamageOnARollHigherThanArmor() {
@@ -35,7 +41,8 @@ public class RefereeTest {
 		Weapon weapon = new Weapon("TestName", 9, false, false, false);
 		Warcaster AttackingWarcaster = new Warcaster(0, 0, 0, 0, 0, 7, "TestName");
 		Warcaster DefendingWarcaster = new Warcaster(0, 0, 14, 0, 0, 0, "TestName");
-		assertEquals(9, referee.GetAttackDamage(AttackingWarcaster, DefendingWarcaster, weapon));
+		Attack attack = new Attack(AttackingWarcaster, weapon, DefendingWarcaster);
+		assertEquals(9, referee.determineAttackDamage(attack));
 	}
 	@Test
 	public void RollDamageDealsNoDamageOnARollLowerThanArmor() {
@@ -44,7 +51,9 @@ public class RefereeTest {
 		Weapon weapon = new Weapon("TestName", 6, false, false, false);
 		Warcaster AttackingWarcaster = new Warcaster(0, 0, 0, 0, 0, 7, "TestName");
 		Warcaster DefendingWarcaster = new Warcaster(0, 0, 22, 0, 0, 0, "TestName");
-		assertEquals(0, referee.GetAttackDamage(AttackingWarcaster, DefendingWarcaster, weapon));
+		Attack attack = new Attack(AttackingWarcaster, weapon, DefendingWarcaster);
+
+		assertEquals(0, referee.determineAttackDamage(attack));
 	}
 	@Test
 	public void RollDamageDealsNoDamageOnARollEqualToArmor() {
@@ -53,6 +62,13 @@ public class RefereeTest {
 		Weapon weapon = new Weapon("TestName", 6, false, false, false);
 		Warcaster AttackingWarcaster = new Warcaster(0, 0, 0, 0, 0, 7, "TestName");
 		Warcaster DefendingWarcaster = new Warcaster(0, 0, 20, 0, 0, 0, "TestName");
-		assertEquals(0, referee.GetAttackDamage(AttackingWarcaster, DefendingWarcaster, weapon));
+		Attack attack = new Attack(AttackingWarcaster, weapon, DefendingWarcaster);
+
+		assertEquals(0, referee.determineAttackDamage(attack));
+	}
+	@Test
+	public void RollDiceReturns7() {
+		Referee referee = new Referee();
+		assertEquals(7, referee.rollDice());
 	}
 }

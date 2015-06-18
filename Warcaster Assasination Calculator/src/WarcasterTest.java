@@ -4,6 +4,13 @@ import org.junit.Test;
 
 public class WarcasterTest {
 
+	private Warcaster testAttacker(int MAT, int strength, int magic) {
+		return new Warcaster(MAT, 0, 0, magic, 1, strength, "Attacko");
+	}
+	private Warcaster testDefender(int defense, int armor, int maxboxes) {
+		return new Warcaster(0, defense, armor, 0, maxboxes, 0, "Defendo");
+	}
+	
 	@Test
 	public void TakeDamageReducesBoxesRemaining() {
 		Warcaster warcaster = new Warcaster(0, 0, 0, 0, 10, 0, "TestName");
@@ -32,14 +39,17 @@ public class WarcasterTest {
 	@Test
 	public void MakeInitialAttackMakesInitialAttack() {
 		Warcaster warcaster = new Warcaster(0, 0, 0, 0, 0, 0, "TestName");
-		warcaster.MakeInitalAttack();
+		warcaster.AddWeapon("Sword", 8, false, false, false);
+		warcaster.makeInitialAttack(testDefender(11, 14, 18));
 		assertTrue(warcaster.GetHasInitialAttackBeenMade());
 	}
 	@Test
 	public void BuyAttackReducesRemainingFocusByOne() {
-		Warcaster warcaster = new Warcaster(0, 0, 0, 7, 0, 0, "TestName");
-		warcaster.BuyAttack();
-		assertEquals(6, warcaster.GetRemainingFocus());
+		Warcaster defender = testDefender(11, 14, 18);
+		Warcaster attacker = testAttacker(5, 4, 7);
+		attacker.AddWeapon("Sword", 5, false, false, false);
+		attacker.BuyAttack(defender);
+		assertEquals(6, attacker.GetRemainingFocus());
 	}
 	@Test
 	public void IsAbleToBuyAttackIsFalseWhenRemainingFocusIs0() {
@@ -50,5 +60,21 @@ public class WarcasterTest {
 	public void IsAbleToBuyAttackIsTrueWhenRemainingFocusIs1() {
 		Warcaster warcaster = new Warcaster(0, 0, 0, 1, 0, 0, "TestName");
 		assertTrue(warcaster.IsAbleToBuyAttack());
+	}
+	@Test
+	public void MakeInitialAttackShouldCreateAnAttackWithFirstWeapon() {
+		Warcaster attacker = testAttacker(5, 4, 6);
+		attacker.AddWeapon("Sword", 5, false, false, false);
+		Warcaster defender = testDefender(11, 14, 18);
+		Attack attack = attacker.makeInitialAttack(defender);
+		assertEquals("Sword", attack.GetWeapon().GetName());
+	}
+	@Test
+	public void BuyAttackShouldCreateAnAttackWithFirstWeapon() {
+		Warcaster attacker = testAttacker(5, 4, 6);
+		attacker.AddWeapon("Sword", 5, false, false, false);
+		Warcaster defender = testDefender(11, 14, 18);
+		Attack attack = attacker.BuyAttack(defender);
+		assertEquals("Sword", attack.GetWeapon().GetName());
 	}
 }
