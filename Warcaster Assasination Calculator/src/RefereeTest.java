@@ -71,4 +71,24 @@ public class RefereeTest {
 		Referee referee = new Referee();
 		assertEquals(7, referee.rollDice());
 	}
+	@Test
+	public void askWarcasterWhatToDoRunsInitialAttackWhenHasInitialAttackBeenMadeIsFalse() {
+		
+		Referee referee = new Referee();
+		Warcaster attacker = new Warcaster(0, 0, 0, 0, 0, 0, "TestName");
+		Warcaster defender = new Warcaster(0, 0, 0, 0, 0, 0, "TestName");
+		attacker.AddWeapon("Sword", 8, false, false, false);
+		referee.askWarcasterWhatToDo(attacker, defender);
+		assertTrue(attacker.GetHasInitialAttackBeenMade());
+	}
+	@Test
+	public void askWarcasterWhatToDoRunsBuyAttackWhenHasInitialAttackBeenMadeIsTrue() {
+		
+		Referee referee = new Referee();
+		Warcaster attacker = new Warcaster(0, 0, 0, 7, 0, 0, "TestName");
+		Warcaster defender = new Warcaster(0, 0, 0, 0, 0, 0, "TestName");
+		attacker.AddWeapon("Sword", 8, false, false, false);
+		referee.askWarcasterWhatToDo(attacker, defender);
+		assertEquals(6, attacker.GetRemainingFocus());
+	}
 }

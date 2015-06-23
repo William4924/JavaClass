@@ -24,4 +24,14 @@ public class Referee {
 		
 		return 7;
 	}
+	
+	public void askWarcasterWhatToDo(Warcaster warcaster, Warcaster defender) {
+		
+		if (warcaster.GetHasInitialAttackBeenMade() == false) {
+			warcaster.makeInitialAttack(defender);
+		}
+		if (warcaster.GetHasInitialAttackBeenMade() == true) {
+			warcaster.BuyAttack(defender);
+		}
+	}
 }
