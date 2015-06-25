@@ -30,7 +30,9 @@ public class Referee {
 		if (warcaster.GetHasInitialAttackBeenMade() == false) {
 			warcaster.makeInitialAttack(defender);
 		}
-		if (warcaster.GetHasInitialAttackBeenMade() == true) {
+		
+		while (warcaster.GetRemainingFocus() > 0) {
+			
 			warcaster.BuyAttack(defender);
 		}
 	}

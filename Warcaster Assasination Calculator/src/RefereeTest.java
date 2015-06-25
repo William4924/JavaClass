@@ -89,6 +89,6 @@ public class RefereeTest {
 		Warcaster defender = new Warcaster(0, 0, 0, 0, 0, 0, "TestName");
 		attacker.AddWeapon("Sword", 8, false, false, false);
 		referee.askWarcasterWhatToDo(attacker, defender);
-		assertEquals(6, attacker.GetRemainingFocus());
+		assertEquals(0, attacker.GetRemainingFocus());
 	}
 }
