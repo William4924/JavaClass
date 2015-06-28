@@ -73,4 +73,17 @@ public class Warcaster {
 		
 		return (RemainingFocus > 0);
 	}
+	
+	public void DetermineWhatAttackToUse(Warcaster defender) {
+		
+		if (HasInitialAttackBeenMade == false) {
+			
+			this.makeInitialAttack(defender);
+		}
+		
+		while (RemainingFocus > 0) {
+			
+			this.BuyAttack(defender);
+		}
+	}
 }

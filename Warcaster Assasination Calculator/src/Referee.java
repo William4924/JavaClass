@@ -27,13 +27,6 @@ public class Referee {
 	
 	public void askWarcasterWhatToDo(Warcaster warcaster, Warcaster defender) {
 		
-		if (warcaster.GetHasInitialAttackBeenMade() == false) {
-			warcaster.makeInitialAttack(defender);
-		}
-		
-		while (warcaster.GetRemainingFocus() > 0) {
-			
-			warcaster.BuyAttack(defender);
-		}
+		warcaster.DetermineWhatAttackToUse(defender);
 	}
 }
